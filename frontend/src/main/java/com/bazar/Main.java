@@ -13,8 +13,7 @@ public class Main {
 
     private static final Gson gson = new Gson();
 
-    private static final String CATALOG_URL = System.getenv().getOrDefault("CATALOG_URL", "http://localhost:5001");
-    private static final String ORDER_URL   = System.getenv().getOrDefault("ORDER_URL",   "http://localhost:5002");
+    private static final String CATALOG_URL = System.getenv().getOrDefault("CATALOG_URL", "http://localhost:5001");    private static final String ORDER_URL   = System.getenv().getOrDefault("ORDER_URL",   "http://localhost:5002");
 
     public static void main(String[] args) {
         port(5000);
