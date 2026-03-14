@@ -1,5 +1,4 @@
 package com.bazar;
-
 import static spark.Spark.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -20,13 +19,11 @@ public class Main {
     public static void main(String[] args) {
         port(5002);
 
-        // ====================== PURCHASE ENDPOINT ======================
         post("/purchase/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
             System.out.println("[Order] Received purchase request for book ID: " + id);
 
             try {
-                // 1. جلب معلومات الكتاب من Catalog
                 String infoUrl = CATALOG_URL + "/info/" + id;
                 String bookJson = sendGetRequest(infoUrl);
                 JsonObject book = gson.fromJson(bookJson, JsonObject.class);
@@ -34,14 +31,12 @@ public class Main {
                 String title = book.get("title").getAsString();
                 int quantity = book.get("quantity").getAsInt();
 
-                // 2. التحقق من الكمية
                 if (quantity <= 0) {
                     res.status(400);
                     System.out.println("[Order] ❌ Book out of stock: " + title);
                     return gson.toJson(Map.of("error", "Book out of stock"));
                 }
 
-                // 3. خصم الكمية (Update Catalog)
                 int newQuantity = quantity - 1;
                 String updateUrl = CATALOG_URL + "/update/" + id;
 
@@ -50,14 +45,12 @@ public class Main {
 
                 sendPutRequest(updateUrl, updateBody.toString());
 
-                // 4. حفظ الطلب + طباعة الرسالة المطلوبة في الـ Lab
                 String logMessage = "bought book " + title;
                 System.out.println("[Order] ✅ " + logMessage);
                 try (FileWriter writer = new FileWriter(ORDERS_FILE, true)) {
                     writer.write(logMessage + " (ID: " + id + ") at " + java.time.LocalDateTime.now() + "\n");
                 }
 
-                // 5. الرد النهائي (JSON)
                 res.type("application/json");
                 return gson.toJson(Map.of("status", "success", "message", logMessage));
 
@@ -72,7 +65,6 @@ public class Main {
         awaitInitialization();
     }
 
-    // ====================== HTTP Helper Methods ======================
     private static String sendGetRequest(String urlString) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

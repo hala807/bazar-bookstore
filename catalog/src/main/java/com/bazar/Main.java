@@ -15,7 +15,6 @@ public class Main {
         port(5001);
         loadBooks();
 
-        // 1. البحث بالموضوع
         get("/search/:topic", (req, res) -> {
             res.type("application/json");
             String topic = req.params(":topic");
@@ -32,21 +31,24 @@ public class Main {
             return gson.toJson(results);
         });
 
-        // 2. معلومات كتاب معين
         get("/info/:id", (req, res) -> {
             res.type("application/json");
             int id = Integer.parseInt(req.params(":id"));
 
             for (Map<String, Object> book : books) {
                 if (((Number) book.get("id")).intValue() == id) {
-                    return gson.toJson(book);
+                    Map<String, Object> item = new HashMap<>();
+                    item.put("title", book.get("title"));
+                    item.put("quantity", book.get("quantity"));
+                    item.put("price", book.get("price"));
+
+                    return gson.toJson(item);
                 }
             }
             res.status(404);
             return gson.toJson("Book not found");
         });
 
-        // 3. تحديث الكمية أو السعر
         put("/update/:id", (req, res) -> {
             res.type("application/json");
             int id = Integer.parseInt(req.params(":id"));
@@ -75,7 +77,6 @@ public class Main {
         File file = new File(CSV_FILE);
 
         if (!file.exists()) {
-            // أنشئ الكتب الافتراضية
             books.add(createBook(1, "How to get a good grade in DOS in 40 minutes a day", "distributed systems", 50, 10));
             books.add(createBook(2, "RPCs for Noobs", "distributed systems", 40, 10));
             books.add(createBook(3, "Xen and the Art of Surviving Undergraduate School", "undergraduate school", 35, 10));
