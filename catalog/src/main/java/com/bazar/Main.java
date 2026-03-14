@@ -1,13 +1,21 @@
 package com.bazar;
+
 import static spark.Spark.*;
-import java.util.*;
 import com.google.gson.Gson;
+import java.util.*;
+import java.io.*;
+
 public class Main {
+
     static Gson gson = new Gson();
     static List<Map<String, Object>> books = new ArrayList<>();
+    static String CSV_FILE = "catalog.csv";
+
     public static void main(String[] args) {
         port(5001);
         loadBooks();
+
+        // 1. البحث بالموضوع
         get("/search/:topic", (req, res) -> {
             res.type("application/json");
             String topic = req.params(":topic");
@@ -24,6 +32,7 @@ public class Main {
             return gson.toJson(results);
         });
 
+        // 2. معلومات كتاب معين
         get("/info/:id", (req, res) -> {
             res.type("application/json");
             int id = Integer.parseInt(req.params(":id"));
@@ -37,35 +46,78 @@ public class Main {
             return gson.toJson("Book not found");
         });
 
+        // 3. تحديث الكمية أو السعر
         put("/update/:id", (req, res) -> {
             res.type("application/json");
             int id = Integer.parseInt(req.params(":id"));
             Map<String, Object> body = gson.fromJson(req.body(), Map.class);
 
             for (Map<String, Object> book : books) {
-                if (((Number) book.get("id")).intValue()== id) {
+                if (((Number) book.get("id")).intValue() == id) {
                     if (body.containsKey("quantity")) {
                         book.put("quantity", ((Double) body.get("quantity")).intValue());
                     }
                     if (body.containsKey("price")) {
                         book.put("price", body.get("price"));
                     }
+                    saveBooks();
                     return gson.toJson("Updated successfully");
                 }
             }
             res.status(404);
             return gson.toJson("Book not found");
         });
+
         System.out.println("Catalog Server running on port 5001");
     }
-    static void loadBooks() {
-        books.add(createBook(1, "How to get a good grade in DOS in 40 minutes a day", "distributed systems", 50, 10));
-        books.add(createBook(2, "RPCs for Noobs", "distributed systems", 40, 10));
-        books.add(createBook(3, "Xen and the Art of Surviving Undergraduate School", "undergraduate school", 35, 10));
-        books.add(createBook(4, "Cooking for the Impatient Undergrad", "undergraduate school", 30, 10));
 
+    static void loadBooks() {
+        File file = new File(CSV_FILE);
+
+        if (!file.exists()) {
+            // أنشئ الكتب الافتراضية
+            books.add(createBook(1, "How to get a good grade in DOS in 40 minutes a day", "distributed systems", 50, 10));
+            books.add(createBook(2, "RPCs for Noobs", "distributed systems", 40, 10));
+            books.add(createBook(3, "Xen and the Art of Surviving Undergraduate School", "undergraduate school", 35, 10));
+            books.add(createBook(4, "Cooking for the Impatient Undergrad", "undergraduate school", 30, 10));
+            saveBooks();
+            return;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                books.add(createBook(
+                        Integer.parseInt(parts[0].trim()),
+                        parts[1].trim(),
+                        parts[2].trim(),
+                        Double.parseDouble(parts[3].trim()),
+                        Integer.parseInt(parts[4].trim())
+                ));
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading books: " + e.getMessage());
+        }
     }
 
+    static void saveBooks() {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(CSV_FILE))) {
+            pw.println("id,title,topic,price,quantity");
+            for (Map<String, Object> book : books) {
+                pw.println(
+                        book.get("id") + "," +
+                                book.get("title") + "," +
+                                book.get("topic") + "," +
+                                book.get("price") + "," +
+                                book.get("quantity")
+                );
+            }
+        } catch (Exception e) {
+            System.out.println("Error saving books: " + e.getMessage());
+        }
+    }
 
     static Map<String, Object> createBook(int id, String title, String topic, double price, int quantity) {
         Map<String, Object> book = new HashMap<>();
