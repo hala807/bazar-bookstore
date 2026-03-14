@@ -9,8 +9,7 @@ public class Main {
 
     static Gson gson = new Gson();
     static List<Map<String, Object>> books = new ArrayList<>();
-    static String CSV_FILE = "catalog.csv";
-
+    private static final String CSV_FILE = System.getProperty("user.dir") + "/catalog.csv";
     public static void main(String[] args) {
         port(5001);
         loadBooks();
