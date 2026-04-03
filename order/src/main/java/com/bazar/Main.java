@@ -2,7 +2,6 @@ package com.bazar;
 import static spark.Spark.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
 import java.io.*;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -13,7 +12,7 @@ import java.util.Map;
 public class Main {
 
     private static final Gson gson = new Gson();
-    private static final String CATALOG_URL = System.getenv().getOrDefault("CATALOG_URL", "http://localhost:5001");   // بنغيّره لـ "http://catalog:5001" لما نعمل Docker
+    private static final String CATALOG_URL = System.getenv().getOrDefault("CATALOG_URL", "http://catalog:5001");   // بنغيّره لـ "http://catalog:5001" لما نعمل Docker
     private static final String ORDERS_FILE = System.getProperty("user.dir") + "/orders.log";
     public static void main(String[] args) {
         port(5002);
@@ -26,7 +25,6 @@ public class Main {
                 String infoUrl = CATALOG_URL + "/info/" + id;
                 String bookJson = sendGetRequest(infoUrl);
                 JsonObject book = gson.fromJson(bookJson, JsonObject.class);
-
                 String title = book.get("title").getAsString();
                 int quantity = book.get("quantity").getAsInt();
 
@@ -59,24 +57,21 @@ public class Main {
                 return gson.toJson(Map.of("error", "Internal server error"));
             }
         });
-
         System.out.println("=== Order Server running on port 5002 ===");
         awaitInitialization();
     }
 
-    private static String sendGetRequest(String urlString) throws Exception {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(urlString))
-                .GET()
-                .build();
+        private static String sendGetRequest(String urlString) throws Exception {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(urlString))
+                    .GET()
+                    .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() != 200) {
-            throw new Exception("Catalog returned status: " + response.statusCode());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return response.body();
         }
-        return response.body();
-    }
 
     private static void sendPutRequest(String urlString, String jsonBody) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
