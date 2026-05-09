@@ -1,22 +1,66 @@
 version: "3.8"
-
 services:
   catalog:
     build: ./catalog
     ports:
       - "5001:5001"
+    volumes:
+      - catalog-data:/app/data
+
+  catalog-replica:
+    build: ./catalog
+    ports:
+      - "5003:5001"
+    volumes:
+      - catalog-replica-data:/app/data
+    depends_on:
+      - catalog
 
   order:
     build: ./order
     ports:
       - "5002:5002"
+    environment:
+      - CATALOG_URL=http://catalog:5001
+      - CATALOG_REPLICA_URL=http://catalog-replica:5001
+      - FRONTEND_CACHE_URL=http://frontend:5000
+    volumes:
+      - order-data:/app/data
     depends_on:
       - catalog
+      - catalog-replica
+
+  order-replica:
+    build: ./order
+    ports:
+      - "5004:5002"
+    environment:
+      - CATALOG_URL=http://catalog:5001
+      - CATALOG_REPLICA_URL=http://catalog-replica:5001
+      - FRONTEND_CACHE_URL=http://frontend:5000
+    volumes:
+      - order-replica-data:/app/data
+    depends_on:
+      - catalog
+      - catalog-replica
 
   frontend:
     build: ./frontend
     ports:
       - "5000:5000"
+    environment:
+      - CATALOG_URL=http://catalog:5001
+      - CATALOG_REPLICA_URL=http://catalog-replica:5001
+      - ORDER_URL=http://order:5002
+      - ORDER_REPLICA_URL=http://order-replica:5002
     depends_on:
       - catalog
+      - catalog-replica
       - order
+      - order-replica
+
+volumes:
+  catalog-data:
+  catalog-replica-data:
+  order-data:
+  order-replica-data:
