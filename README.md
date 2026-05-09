@@ -1,2 +1,2 @@
 # bazar-bookstore
- Multi-tier online bookstore - DOS (Distributed and Operating Systems) Lab 1
+ Multi-tier online bookstore - DOS (Distributed Operating Systems)

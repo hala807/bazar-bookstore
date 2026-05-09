@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dc990f52-4d8d-4cd6-ad1f-1b8ead9f9fbe" name="Changes" comment="git commit -m &quot;feat: Dockerize the distributed bookstore system&quot; -m &quot;- Add Dockerfile for frontend, catalog, and order services&quot; -m &quot;- Create docker-compose.yml to orchestrate the containers&quot;">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/src/main/java/com/bazar/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/src/main/java/com/bazar/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;s12219454-creator&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/hala807/bazar-bookstore.git&quot;,
+    &quot;accountId&quot;: &quot;78718894-6a78-4c10-a809-7c4a2bf57243&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3AwFlBHFxsSAE1Qw9g97j8HeAy5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main (1).executor": "Run",
+    "Application.Main (2).executor": "Run",
+    "Application.Main (3).executor": "Run",
+    "Application.Main.executor": "Run",
+    "Maven.catalog [clean].executor": "Run",
+    "Maven.catalog [package].executor": "Run",
+    "Maven.frontend [clean].executor": "Run",
+    "Maven.frontend [package].executor": "Run",
+    "Maven.order [clean].executor": "Run",
+    "Maven.order [package].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/FourthYearSecSem/DOS/bazar-bookstore",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.editor"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bazar.Main" />
+      <module name="order" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bazar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bazar.Main" />
+      <module name="catalog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bazar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bazar.Main" />
+      <module name="frontend" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bazar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.bazar.Main" />
+      <module name="bazar-bookstore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bazar.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main (3)" />
+        <item itemvalue="Application.Main (2)" />
+        <item itemvalue="Application.Main (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dc990f52-4d8d-4cd6-ad1f-1b8ead9f9fbe" name="Changes" comment="" />
+      <created>1773495874711</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773495874711</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Implement Order Server microservice&#10;&#10;- Added purchase endpoint (POST /purchase/:id) on port 5002&#10;- Integrated with Catalog Server via HTTP (check stock + update quantity)&#10;- Added logging: &quot;bought book XXX&quot; in console + orders.log file&#10;- Added error handling for out-of-stock and connection issues">
+      <option name="closed" value="true" />
+      <created>1773510683937</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1773510683937</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Frontend: complete frontend microservice&quot; -m &quot;Added:&#10;- Port 5000 as single entry point for all client requests&#10;- /search/:topic, /info/:id, /purchase/:id routes&#10;- Proper forwarding to Catalog &amp; Order using HTTP client&#10;- Required log messages ('Forwarding...' + results)&#10;- Minor dependency cleanup">
+      <option name="closed" value="true" />
+      <created>1773524747416</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1773524747416</updated>
+    </task>
+    <task id="LOCAL-00003" summary="git commit -m &quot;feat: Dockerize the distributed bookstore system&quot; -m &quot;- Add Dockerfile for frontend, catalog, and order services&quot; -m &quot;- Create docker-compose.yml to orchestrate the containers&quot;">
+      <option name="closed" value="true" />
+      <created>1773530543698</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1773530543698</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implement Order Server microservice&#10;&#10;- Added purchase endpoint (POST /purchase/:id) on port 5002&#10;- Integrated with Catalog Server via HTTP (check stock + update quantity)&#10;- Added logging: &quot;bought book XXX&quot; in console + orders.log file&#10;- Added error handling for out-of-stock and connection issues" />
+    <MESSAGE value="Frontend: complete frontend microservice&quot; -m &quot;Added:&#10;- Port 5000 as single entry point for all client requests&#10;- /search/:topic, /info/:id, /purchase/:id routes&#10;- Proper forwarding to Catalog &amp; Order using HTTP client&#10;- Required log messages ('Forwarding...' + results)&#10;- Minor dependency cleanup" />
+    <MESSAGE value="git commit -m &quot;feat: Dockerize the distributed bookstore system&quot; -m &quot;- Add Dockerfile for frontend, catalog, and order services&quot; -m &quot;- Create docker-compose.yml to orchestrate the containers&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="git commit -m &quot;feat: Dockerize the distributed bookstore system&quot; -m &quot;- Add Dockerfile for frontend, catalog, and order services&quot; -m &quot;- Create docker-compose.yml to orchestrate the containers&quot;" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

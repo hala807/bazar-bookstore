@@ -9,7 +9,7 @@ public class Main {
 
     static Gson gson = new Gson();
     static List<Map<String, Object>> books = new ArrayList<>();
-    private static final String CSV_FILE = System.getProperty("user.dir") + "/catalog.csv";
+    private static final String CSV_FILE = "/app/data/catalog.csv";
     public static void main(String[] args) {
         port(5001);
         loadBooks();
@@ -27,6 +27,7 @@ public class Main {
                     results.add(item);
                 }
             }
+            System.out.println("[Catalog] Search by topic '" + topic + "' → " + gson.toJson(results));
             return gson.toJson(results);
         });
 
@@ -41,6 +42,7 @@ public class Main {
                     item.put("quantity", book.get("quantity"));
                     item.put("price", book.get("price"));
 
+                    System.out.println("[Catalog] Info for ID " + id + ": " + gson.toJson(item));
                     return gson.toJson(item);
                 }
             }
@@ -62,6 +64,7 @@ public class Main {
                         book.put("price", body.get("price"));
                     }
                     saveBooks();
+                    System.out.println("[Catalog] Updated book ID " + id + " → " + gson.toJson(body));
                     return gson.toJson("Updated successfully");
                 }
             }
@@ -80,6 +83,7 @@ public class Main {
             books.add(createBook(2, "RPCs for Noobs", "distributed systems", 40, 10));
             books.add(createBook(3, "Xen and the Art of Surviving Undergraduate School", "undergraduate school", 35, 10));
             books.add(createBook(4, "Cooking for the Impatient Undergrad", "undergraduate school", 30, 10));
+            new File("/app/data").mkdirs();
             saveBooks();
             return;
         }
